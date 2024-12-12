@@ -1,0 +1,44 @@
+#include <string.h>
+
+#include "../s21_string.h"
+
+#test equal_buffers
+char *buffer1 = "Test string";
+char *buffer2 = "Test string";
+ck_assert_int_eq(s21_memcmp(buffer1, buffer2, strlen(buffer1)),
+                 memcmp(buffer1, buffer2, strlen(buffer1)));
+
+#test different_buffers
+char *buffer1 = "Test string";
+char *buffer2 = "Test strinh";
+ck_assert_int_eq(s21_memcmp(buffer1, buffer2, strlen(buffer1)),
+                 memcmp(buffer1, buffer2, strlen(buffer1)));
+
+#test zero_length
+char *buffer1 = "Test string";
+char *buffer2 = "Test strinh";
+ck_assert_int_eq(s21_memcmp(buffer1, buffer2, 0), memcmp(buffer1, buffer2, 0));
+
+#test different_length
+char *buffer1 = "Test string longer";
+char *buffer2 = "Test string";
+ck_assert_int_eq(s21_memcmp(buffer1, buffer2, strlen(buffer1)),
+                 memcmp(buffer1, buffer2, strlen(buffer1)));
+
+#test first_buffer_shorter
+char *buffer1 = "Test";
+char *buffer2 = "Test string";
+ck_assert_int_eq(s21_memcmp(buffer1, buffer2, strlen(buffer1)),
+                 memcmp(buffer1, buffer2, strlen(buffer1)));
+
+#test first_buffer_longer
+char *buffer1 = "Test string longer & longer * longer";
+char *buffer2 = "Test string";
+ck_assert_int_eq(s21_memcmp(buffer1, buffer2, strlen(buffer1)),
+                 memcmp(buffer1, buffer2, strlen(buffer1)));
+
+#test first_buffer_shorter2
+char *buffer1 = "#%";
+char *buffer2 = "Test string";
+ck_assert_int_eq(s21_memcmp(buffer1, buffer2, strlen(buffer2)),
+                 memcmp(buffer1, buffer2, strlen(buffer2)));

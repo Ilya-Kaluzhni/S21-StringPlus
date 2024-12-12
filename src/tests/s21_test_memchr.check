@@ -1,0 +1,37 @@
+#include <string.h>
+
+#include "../s21_string.h"
+
+#test normal_case
+char *test_string = "Hello, world!";
+char test_char = 'w';
+char *test_result = s21_memchr(test_string, test_char, strlen(test_string));
+ck_assert_ptr_eq(test_result,
+                 memchr(test_string, test_char, strlen(test_string)));
+
+#test char_not_found
+char *test_string = "Hello, world!";
+char test_char = 'x';
+char *test_result = s21_memchr(test_string, test_char, strlen(test_string));
+ck_assert_ptr_eq(test_result,
+                 memchr(test_string, test_char, strlen(test_string)));
+
+#test zero_length
+char *test_string = "Hello, world!";
+char test_char = 'w';
+char *test_result = s21_memchr(test_string, test_char, 0);
+ck_assert_ptr_eq(test_result, memchr(test_string, test_char, 0));
+
+#test char_at_end
+char *test_string = "Hello, world!";
+char test_char = '!';
+char *test_result = s21_memchr(test_string, test_char, strlen(test_string));
+ck_assert_ptr_eq(test_result,
+                 memchr(test_string, test_char, strlen(test_string)));
+
+#test char_at_beginning
+char *test_string = "Hello, world!";
+char test_char = 'H';
+char *test_result = s21_memchr(test_string, test_char, strlen(test_string));
+ck_assert_ptr_eq(test_result,
+                 memchr(test_string, test_char, strlen(test_string)));

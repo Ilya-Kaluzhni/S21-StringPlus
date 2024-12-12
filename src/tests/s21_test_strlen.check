@@ -1,0 +1,36 @@
+#include <string.h>
+
+#include "../s21_string.h"
+
+#test normal_1
+ck_assert_int_eq(s21_strlen("HeLLooo21"), strlen("HeLLooo21"));
+
+#test numbers
+ck_assert_int_eq(s21_strlen("123456"), strlen("123456"));
+
+#test letters
+ck_assert_int_eq(s21_strlen("abcdef"), strlen("abcdef"));
+
+#test escape_sqn
+ck_assert_int_eq(s21_strlen("1\n"), strlen("1\n"));
+
+#test line_end
+ck_assert_int_eq(s21_strlen("123abc\0"), strlen("123abc\0"));
+
+#test empty
+ck_assert_int_eq(s21_strlen(""), strlen(""));
+
+#test extra_symbols
+ck_assert_int_eq(s21_strlen("HeLLooo#21"), strlen("HeLLooo#21"));
+
+#test long_str
+s21_size_t test_long_str = s21_strlen(
+    "For almost a year, a group of the brightest mathematicians, linguists and "
+    "crossword puzzle enthusiasts have been trying to solve the most difficult "
+    "problem of deciphering the German Enigma cipher");
+ck_assert_int_eq(
+    test_long_str,
+    strlen(
+        "For almost a year, a group of the brightest mathematicians, linguists "
+        "and crossword puzzle enthusiasts have been trying to solve the most "
+        "difficult problem of deciphering the German Enigma cipher"));

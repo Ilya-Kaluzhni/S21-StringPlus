@@ -1,0 +1,50 @@
+#include <string.h>
+
+#include "../s21_string.h"
+
+#test src_empty
+char *s1 = (char *)s21_insert("", "Hello", 0);
+char *s2 = "Hello";
+ck_assert_str_eq(s1, s2);
+free(s1);
+
+#test src_add
+char *s1 = (char *)s21_insert("Hello", " world", 5);
+char *s2 = "Hello world";
+ck_assert_str_eq(s1, s2);
+free(s1);
+
+#test usual_values
+char *s1 = (char *)s21_insert("Hello world", "21", 7);
+char *s2 = "Hello w21orld";
+ck_assert_str_eq(s1, s2);
+free(s1);
+
+#test long_string
+char *s1 = (char *)s21_insert(
+    "Compares two null-terminated char * string values, using the strcmp() "
+    "function internally",
+    "FROM MANUAL ", 0);
+char *s2 =
+    "FROM MANUAL Compares two null-terminated char * string values, using the "
+    "strcmp() function internally";
+ck_assert_str_eq(s1, s2);
+free(s1);
+
+#test src_less
+char *s1 = (char *)s21_insert("a2", "l", 4);
+char *s2 = S21_NULL;
+ck_assert_ptr_eq(s1, s2);
+free(s1);
+
+#test all_null
+char *s1 = (char *)s21_insert("", "", 0);
+char *s2 = "";
+ck_assert_str_eq(s1, s2);
+free(s1);
+
+#test null_str
+char *s1 = (char *)s21_insert("", S21_NULL, 1);
+char *s2 = S21_NULL;
+ck_assert_ptr_eq(s1, s2);
+free(s1);

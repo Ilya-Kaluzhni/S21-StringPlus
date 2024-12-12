@@ -1,0 +1,39 @@
+#include <string.h>
+
+#include "../s21_string.h"
+
+#test find_character
+char *test_string = "Hello, world!";
+char test_char = 'w';
+ck_assert_ptr_eq(s21_strchr(test_string, test_char),
+                 strchr(test_string, test_char));
+
+#test character_not_found
+char *test_string = "Hello, world!";
+char test_char = 'x';
+ck_assert_ptr_eq(s21_strchr(test_string, test_char),
+                 strchr(test_string, test_char));
+
+#test find_first_character
+char *test_string = "Hello, world!";
+char test_char = 'H';
+ck_assert_ptr_eq(s21_strchr(test_string, test_char),
+                 strchr(test_string, test_char));
+
+#test find_last_character
+char *test_string = "Hello, world!";
+char test_char = '!';
+ck_assert_ptr_eq(s21_strchr(test_string, test_char),
+                 strchr(test_string, test_char));
+
+#test find_null_character
+char *test_string = "Hello, world!";
+char test_char = '\0';
+ck_assert_ptr_eq(s21_strchr(test_string, test_char),
+                 strchr(test_string, test_char));
+
+#test null_error
+char *test_string = S21_NULL;
+char test_char = 'm';
+char *result_return = s21_strchr(test_string, test_char);
+ck_assert_ptr_null(result_return);

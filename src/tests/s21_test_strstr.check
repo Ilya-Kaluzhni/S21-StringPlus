@@ -1,0 +1,39 @@
+#include <string.h>
+
+#include "../s21_string.h"
+
+#test find_substring
+char *haystack = "Hello, world!";
+char *needle = "world";
+char *test_result = s21_strstr(haystack, needle);
+ck_assert_ptr_eq(test_result, strstr(haystack, needle));
+
+#test substring_not_found
+char *haystack = "Hello, world!";
+char *needle = "xyz";
+char *test_result = s21_strstr(haystack, needle);
+ck_assert_ptr_eq(test_result, strstr(haystack, needle));
+
+#test find_at_start
+char *haystack = "Hello, world!";
+char *needle = "Hello";
+char *test_result = s21_strstr(haystack, needle);
+ck_assert_ptr_eq(test_result, strstr(haystack, needle));
+
+#test find_empty_needle
+char *haystack = "Hello, world!";
+char *needle = "";
+char *test_result = s21_strstr(haystack, needle);
+ck_assert_ptr_eq(test_result, strstr(haystack, needle));
+
+#test empty_haystack
+char *haystack = "";
+char *needle = "world";
+char *test_result = s21_strstr(haystack, needle);
+ck_assert_ptr_eq(test_result, strstr(haystack, needle));
+
+#test both_empty
+char *haystack = "";
+char *needle = "";
+char *test_result = s21_strstr(haystack, needle);
+ck_assert_ptr_eq(test_result, strstr(haystack, needle));

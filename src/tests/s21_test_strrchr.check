@@ -1,0 +1,47 @@
+#include <string.h>
+
+#include "../s21_string.h"
+
+#test usual_values
+const char *str = "Hello it wqeerrjniv";
+int c = 'i';
+ck_assert_ptr_eq(s21_strrchr(str, c), strrchr(str, c));
+
+#test usual_values2
+const char *str =
+    "The strchr() and strrchr() functions return a pointer to the matched "
+    "character or NULL if the character is not found";
+int c = ')';
+ck_assert_ptr_eq(s21_strrchr(str, c), strrchr(str, c));
+
+#test usual_values3
+const char *str =
+    "@#$%^&*dfghjknb5801479632$%^&*()_!@#$%^&*CVBNM<dqwertyuio#$%^&*";
+int c = '#';
+ck_assert_ptr_eq(s21_strrchr(str, c), strrchr(str, c));
+
+#test null_str
+const char *str = "S21_NULL";
+int c = '0';
+ck_assert_ptr_eq(s21_strrchr(str, c), strrchr(str, c));
+
+#test no_such_value
+const char *str = "0123456789";
+int c = 'x';
+ck_assert_ptr_eq(s21_strrchr(str, c), strrchr(str, c));
+
+#test empty_str
+const char *str = " ";
+int c = '$';
+ck_assert_ptr_eq(s21_strrchr(str, c), strrchr(str, c));
+
+#test empty_str1
+const char *str = " ";
+int c = '\0';
+ck_assert_ptr_eq(s21_strrchr(str, c), strrchr(str, c));
+
+#test null_error
+const char *str = S21_NULL;
+char c = '0';
+char *res = s21_strrchr(str, c);
+ck_assert_ptr_null(res);

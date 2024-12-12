@@ -1,0 +1,69 @@
+#include <string.h>
+
+#include "../s21_string.h"
+
+#test usual_value
+char *s1 = (char *)s21_trim("Hello world", "world");
+char s2[] = "Hello ";
+ck_assert_str_eq(s1, s2);
+free(s1);
+
+#test usual_value2
+char *s1 = (char *)s21_trim(
+    "C# Trim() is a string method in C#. This method is used to removes all "
+    "leading C#",
+    "C#");
+char s2[] =
+    " Trim() is a string method in C#. This method is used to removes all "
+    "leading ";
+ck_assert_str_eq(s1, s2);
+free(s1);
+
+#test empty_line
+char *s1 = (char *)s21_trim(" ", "C#");
+char *s2 = " ";
+ck_assert_str_eq(s1, s2);
+free(s1);
+
+#test empty_line2
+char *s1 = (char *)s21_trim(
+    "C# Trim() is a string method in C#. This method is used to removes all "
+    "leading",
+    " ");
+char *s2 =
+    "C# Trim() is a string method in C#. This method is used to removes all "
+    "leading";
+ck_assert_str_eq(s1, s2);
+free(s1);
+
+#test not_usual_value
+char *s1 = (char *)s21_trim(
+    "First method will not take any parameter and 150$%^&hbvcvb",
+    "wecvbj09%^&");
+char *s2 = "First method will not take any parameter and 150$%^&h";
+ck_assert_str_eq(s1, s2);
+free(s1);
+
+#test null_value
+char *s1 = (char *)s21_trim("S21_NULL", "C#");
+char *s2 = "S21_NULL";
+ck_assert_str_eq(s1, s2);
+free(s1);
+
+#test null_value2
+char *s1 = (char *)s21_trim("First method will not take any parameter and ...",
+                            "S21_NULL");
+char *s2 = "First method will not take any parameter and ...";
+ck_assert_str_eq(s1, s2);
+free(s1);
+
+#test no_such_value
+char *s1 = (char *)s21_trim(
+    "C# Trim() is a string method in C#. This method is used to removes all "
+    "leading",
+    "021x&v");
+char *s2 =
+    "C# Trim() is a string method in C#. This method is used to removes all "
+    "leading";
+ck_assert_str_eq(s1, s2);
+free(s1);

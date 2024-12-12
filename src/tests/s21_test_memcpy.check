@@ -1,0 +1,49 @@
+#include <check.h>
+#include <string.h>
+
+#include "../s21_string.h"
+
+#test normal_copy
+char source[] = "Test string";
+char dest1[20];
+char dest2[20];
+s21_memcpy(dest1, source, sizeof(source));
+memcpy(dest2, source, sizeof(source));
+ck_assert_mem_eq(dest1, dest2, sizeof(source));
+
+#test copy_partial
+char source[] = "Test string";
+char dest1[20] = {0};
+char dest2[20] = {0};
+s21_memcpy(dest1, source, 4);  // Копируем первые 4 символа
+memcpy(dest2, source, 4);      // Аналогично
+ck_assert_mem_eq(dest1, dest2, 4);
+
+#test copy_with_null_bytes
+char source[] = {'a', 'b', 'c', '\0', 'd', 'e', '\0'};
+char dest1[10] = {0};
+char dest2[10] = {0};
+s21_memcpy(dest1, source, sizeof(source));
+memcpy(dest2, source, sizeof(source));
+ck_assert_mem_eq(dest1, dest2, sizeof(source));
+
+#test zero_length
+char source[] = "Test string";
+char dest1[20] = "Initial string";
+char dest2[20] = "Initial string";
+s21_memcpy(dest1, source, 0);
+memcpy(dest2, source, 0);
+ck_assert_mem_eq(dest1, dest2, sizeof(dest1));  // Сравниваем весь буфер
+
+#test large_data
+char large_source[1000];
+char large_dest1[1000];
+char large_dest2[1000];
+memset(large_source, 'x',
+       sizeof(large_source));  // Заполняем источник символами 'x'
+s21_memcpy(large_dest1, large_source, sizeof(large_source));
+memcpy(large_dest2, large_source, sizeof(large_source));
+ck_assert_mem_eq(large_dest1, large_dest2, sizeof(large_source));
+
+#test null_error
+ck_assert_ptr_null(s21_memcpy(S21_NULL, "hello", 5));

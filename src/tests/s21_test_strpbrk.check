@@ -1,0 +1,39 @@
+#include <string.h>
+
+#include "../s21_string.h"
+
+#test normal_case
+char *str_1 = "Hello, world!";
+char *str_2 = "world";
+char *test_result = s21_strpbrk(str_1, str_2);
+ck_assert_ptr_eq(test_result, strpbrk(str_1, str_2));
+
+#test no_match
+char *str_1 = "I am Groot";
+char *str_2 = "Gamora";
+char *test_result = s21_strpbrk(str_1, str_2);
+ck_assert_ptr_eq(test_result, strpbrk(str_1, str_2));
+
+#test empty_first_string
+char *str_1 = "";
+char *str_2 = "hi";
+char *test_result = s21_strpbrk(str_1, str_2);
+ck_assert_ptr_eq(test_result, strpbrk(str_1, str_2));
+
+#test empty_second_string
+char *str_1 = "Hello Kitty";
+char *str_2 = "";
+char *test_result = s21_strpbrk(str_1, str_2);
+ck_assert_ptr_eq(test_result, strpbrk(str_1, str_2));
+
+#test both_empty_strings
+char *str_1 = "";
+char *str_2 = "";
+char *test_result = s21_strpbrk(str_1, str_2);
+ck_assert_ptr_eq(test_result, strpbrk(str_1, str_2));
+
+#test single_character
+char *str_1 = "Hello, world!";
+char *str_2 = "w";
+char *test_result = s21_strpbrk(str_1, str_2);
+ck_assert_ptr_eq(test_result, strpbrk(str_1, str_2));

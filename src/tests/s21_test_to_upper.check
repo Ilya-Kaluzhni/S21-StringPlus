@@ -1,0 +1,59 @@
+#include <string.h>
+
+#include "../s21_string.h"
+
+#test normal_1
+char *test_normal_1 = s21_to_upper("GoodLuck21");
+ck_assert_str_eq(test_normal_1, "GOODLUCK21");
+free(test_normal_1);
+
+#test normal_2
+char *test_normal_2 = s21_to_upper("myfriend!");
+ck_assert_str_eq(test_normal_2, "MYFRIEND!");
+free(test_normal_2);
+
+#test normal_3
+char *test_normal_3 = s21_to_upper("s21_Hello");
+ck_assert_str_eq(test_normal_3, "S21_HELLO");
+free(test_normal_3);
+
+#test normal_4
+char *test_normal_4 = s21_to_upper("S21");
+ck_assert_str_eq(test_normal_4, "S21");
+free(test_normal_4);
+
+#test normal_5
+char *test_normal_5 = s21_to_upper("s21_Privet\n");
+ck_assert_str_eq(test_normal_5, "S21_PRIVET\n");
+free(test_normal_5);
+
+#test null
+char *test_null = s21_to_upper(S21_NULL);
+ck_assert_ptr_null(test_null);
+
+#test empty
+char *test_empty = s21_to_upper("");
+ck_assert_str_eq(test_empty, "");
+free(test_empty);
+
+#test extra_symbols
+char *test_extra_symbols = s21_to_upper("HeLLooo#21");
+ck_assert_str_eq(test_extra_symbols, "HELLOOO#21");
+free(test_extra_symbols);
+
+#test long_str
+char *test_long_str = s21_to_upper(
+    "For almost a year, a group of the brightest mathematicians, linguists AND "
+    "crossword puzzle enthusiasts have Been trying to solve the Most difficult "
+    "problem of deciphering the German Enigma cipher");
+ck_assert_str_eq(
+    test_long_str,
+    "FOR ALMOST A YEAR, A GROUP OF THE BRIGHTEST MATHEMATICIANS, LINGUISTS AND "
+    "CROSSWORD PUZZLE ENTHUSIASTS HAVE BEEN TRYING TO SOLVE THE MOST DIFFICULT "
+    "PROBLEM OF DECIPHERING THE GERMAN ENIGMA CIPHER");
+free(test_long_str);
+
+#test nonletter_symbol
+char *test_nonletter_symbol = s21_to_upper("98#76-+!#21");
+ck_assert_str_eq(test_nonletter_symbol, "98#76-+!#21");
+free(test_nonletter_symbol);

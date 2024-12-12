@@ -1,0 +1,34 @@
+#include <string.h>
+
+#include "../s21_string.h"
+
+#test normal_set
+char buffer1[20] = {0};
+char buffer2[20] = {0};
+s21_memset(buffer1, 'A', 10);
+memset(buffer2, 'A', 10);
+ck_assert_mem_eq(buffer1, buffer2, 10);
+
+#test set_zero
+char buffer1[20] = {0};
+char buffer2[20] = {0};
+s21_memset(buffer1, 'A', 1);
+memset(buffer2, 'A', 1);
+ck_assert_mem_eq(buffer1, buffer2, 10);
+
+#test full_length_set
+char buffer1[20] = {0};
+char buffer2[20] = {0};
+s21_memset(buffer1, 'B', sizeof(buffer1));
+memset(buffer2, 'B', sizeof(buffer2));
+ck_assert_mem_eq(buffer1, buffer2, sizeof(buffer1));
+
+#test set_byte_value
+char buffer1[20] = {0};
+char buffer2[20] = {0};
+s21_memset(buffer1, 255, 5);
+memset(buffer2, 255, 5);
+ck_assert_mem_eq(buffer1, buffer2, 5);
+
+#test null_error
+ck_assert_ptr_null(s21_memset(S21_NULL, 255, 5));

@@ -1,0 +1,218 @@
+#include <string.h>
+
+#include "../s21_string.h"
+
+#test test_exponent_1
+double value = 10041;
+char *format = "%e";
+
+char string1[100], string2[100];
+
+s21_sprintf(string1, format, value);
+sprintf(string2, format, value);
+
+ck_assert_str_eq(string1, string2);
+
+#test test_exponent_2
+double value = 0.0123412;
+char *format = "%e";
+
+char string1[100], string2[100];
+
+s21_sprintf(string1, format, value);
+sprintf(string2, format, value);
+
+ck_assert_str_eq(string1, string2);
+
+#test test_exponent_3
+double value = 10041;
+char *format = "%E";
+
+char string1[100], string2[100];
+
+s21_sprintf(string1, format, value);
+sprintf(string2, format, value);
+
+ck_assert_str_eq(string1, string2);
+
+#test test_exponent_4
+double value_1 = 10041;
+double value_2 = 0.0123412;
+char *format = "%E %e";
+
+char string1[100], string2[100];
+
+s21_sprintf(string1, format, value_1, value_2);
+sprintf(string2, format, value_1, value_2);
+
+ck_assert_str_eq(string1, string2);
+
+#test test_hex_1
+int value = 12345;
+char *format = "%x";
+
+char string1[100], string2[100];
+
+s21_sprintf(string1, format, value);
+sprintf(string2, format, value);
+
+ck_assert_str_eq(string1, string2);
+
+#test test_hex_2
+int value = 1233;
+char *format = "%X";
+
+char string1[100], string2[100];
+
+s21_sprintf(string1, format, value);
+sprintf(string2, format, value);
+
+ck_assert_str_eq(string1, string2);
+
+#test test_hex_3
+int value_1 = 12345;
+int value_2 = 54321;
+char *format = "%x %x";
+
+char string1[100], string2[100];
+
+s21_sprintf(string1, format, value_1, value_2);
+sprintf(string2, format, value_1, value_2);
+
+ck_assert_str_eq(string1, string2);
+
+#test test_oct_1
+int value = 12345;
+char *format = "%o";
+
+char string1[100], string2[100];
+
+s21_sprintf(string1, format, value);
+sprintf(string2, format, value);
+
+ck_assert_str_eq(string1, string2);
+
+#test test_oct_2
+int value_1 = 12345;
+int value_2 = 54321;
+char *format = "%o %o";
+
+char string1[100], string2[100];
+
+s21_sprintf(string1, format, value_1, value_2);
+sprintf(string2, format, value_1, value_2);
+
+ck_assert_str_eq(string1, string2);
+
+#test test_pointer_1
+int value = 12345;
+char *format = "%p";
+
+char string1[100], string2[100];
+
+s21_sprintf(string1, format, value);
+sprintf(string2, format, value);
+
+ck_assert_str_eq(string1, string2);
+
+#test test_pointer_2
+int value_1 = 12345;
+int value_2 = 54321;
+char *format = "%p %p";
+
+char string1[100], string2[100];
+
+s21_sprintf(string1, format, value_1, value_2);
+sprintf(string2, format, value_1, value_2);
+
+ck_assert_str_eq(string1, string2);
+
+#test test_g_1
+double value = 1234512.1234512;
+char *format = "%g";
+
+char string1[100], string2[100];
+
+s21_sprintf(string1, format, value);
+sprintf(string2, format, value);
+
+ck_assert_str_eq(string1, string2);
+
+#test test_g_2
+double value = 11223344;
+char *format = "%G";
+
+char string1[100], string2[100];
+
+s21_sprintf(string1, format, value);
+sprintf(string2, format, value);
+
+ck_assert_str_eq(string1, string2);
+
+#test test_width_1
+int value = 394;
+int width = 10;
+char *format = "%*d";
+
+char string1[100], string2[100];
+
+s21_sprintf(string1, format, width, value);
+sprintf(string2, format, width, value);
+
+ck_assert_str_eq(string1, string2);
+
+#test test_width_2
+int value = 394;
+char *format = "%010d";
+
+char string1[100], string2[100];
+
+s21_sprintf(string1, format, value);
+sprintf(string2, format, value);
+
+ck_assert_str_eq(string1, string2);
+
+#test test_precision_1
+double value1 = 394.391;
+int precision = 3;
+char *format = "%.*lf";
+
+char string1[100], string2[100];
+
+s21_sprintf(string1, format, precision, value1);
+sprintf(string2, format, precision, value1);
+
+ck_assert_str_eq(string1, string2);
+
+#test test_L_1
+long double value = 123456789.0;
+char *format = "%Lf";
+
+char string1[100], string2[100];
+
+s21_sprintf(string1, format, value);
+sprintf(string2, format, value);
+
+ck_assert_str_eq(string1, string2);
+
+#test test_flag_1
+int value = 12345;
+char *format = "%#x";
+
+char string1[100], string2[100];
+
+s21_sprintf(string1, format, value);
+sprintf(string2, format, value);
+
+ck_assert_str_eq(string1, string2);
+
+#test test_flag_2
+int value = 12345;
+char *format = "%#o";
+
+char string1[100], string2[100];
+
+s21_sprintf(string1, format, value);
+sprintf(string2, format, value);
+
+ck_assert_str_eq(string1, string2);

@@ -1,0 +1,22 @@
+#include <string.h>
+
+#include "../s21_string.h"
+
+#test valid_error_numbers
+int error_numbers[] = {0, 1, 2, 3, 10, 20, 100};
+for (size_t i = 0; i < sizeof(error_numbers) / sizeof(error_numbers[0]); i++) {
+  const char *error_message = s21_strerror(error_numbers[i]);
+  ck_assert_ptr_nonnull(error_message);
+}
+
+#test unknown_error_code
+const char *error_message = s21_strerror(-1);
+ck_assert_ptr_nonnull(error_message);
+
+#test zero_error_code
+const char *error_message = s21_strerror(0);
+ck_assert_ptr_nonnull(error_message);
+
+#test large_error_number
+const char *error_message = s21_strerror(1000);
+ck_assert_ptr_nonnull(error_message);

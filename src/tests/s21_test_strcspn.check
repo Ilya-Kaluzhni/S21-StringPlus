@@ -1,0 +1,43 @@
+#include <string.h>
+
+#include "../s21_string.h"
+
+#test normal_1
+char *str_1 = "PrivetHello";
+char *str_2 = "Goodbye";
+ck_assert_int_eq(s21_strcspn(str_1, str_2), strcspn(str_1, str_2));
+
+#test no_eq
+char *str_1 = "123";
+char *str_2 = "5678";
+ck_assert_int_eq(s21_strcspn(str_1, str_2), strcspn(str_1, str_2));
+
+#test empty
+char *str_1 = "";
+char *str_2 = "5678";
+ck_assert_int_eq(s21_strcspn(str_1, str_2), strcspn(str_1, str_2));
+
+#test escape_sqn
+char *str_1 = "123Hello_world\n";
+char *str_2 = "Holly078";
+ck_assert_int_eq(s21_strcspn(str_1, str_2), strcspn(str_1, str_2));
+
+#test long_str
+char *str_1 =
+    "For almost a year, a group of the brightest mathematicians, linguists and "
+    "crossword puzzle enthusiasts have been trying to solve the most difficult "
+    "problem of deciphering the German Enigma cipher";
+char *str_2 =
+    "A string of n characters is represented as an array of n + 1 elements, "
+    "the last of which is a NULL character";
+ck_assert_int_eq(s21_strcspn(str_1, str_2), strcspn(str_1, str_2));
+
+#test extra_symbols
+char *str_1 = "Hello_#Abrak;adab%r?a";
+char *str_2 = "Abrakadabra#:$;?";
+ck_assert_int_eq(s21_strcspn(str_1, str_2), strcspn(str_1, str_2));
+
+#test normal_2
+char *str_1 = "Best school21";
+char *str_2 = "qwubc397";
+ck_assert_int_eq(s21_strcspn(str_1, str_2), strcspn(str_1, str_2));

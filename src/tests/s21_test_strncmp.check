@@ -1,0 +1,33 @@
+#include <string.h>
+
+#include "../s21_string.h"
+
+#test strings_equal
+const char *str1 = "Hello, world!";
+const char *str2 = "Hello, world!";
+size_t n = 13;
+ck_assert_int_eq(s21_strncmp(str1, str2, n), strncmp(str1, str2, n));
+
+#test first_string_smaller
+const char *str1 = "Hello, world!";
+const char *str2 = "Hello, world!!";
+size_t n = 13;
+ck_assert_int_eq(s21_strncmp(str1, str2, n), strncmp(str1, str2, n));
+
+#test second_string_smaller
+const char *str1 = "Hello, world!";
+const char *str2 = "Hello, world";
+size_t n = 13;
+ck_assert_int_eq(s21_strncmp(str1, str2, n), strncmp(str1, str2, n));
+
+#test compare_partial
+const char *str1 = "Hello, world!";
+const char *str2 = "Hello, there!";
+size_t n = 7;
+ck_assert_int_eq(s21_strncmp(str1, str2, n), strncmp(str1, str2, n));
+
+#test zero_length
+const char *str1 = "Hello, world!";
+const char *str2 = "Hello, there!";
+size_t n = 0;
+ck_assert_int_eq(s21_strncmp(str1, str2, n), strncmp(str1, str2, n));

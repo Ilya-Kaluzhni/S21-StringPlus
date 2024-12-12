@@ -1,0 +1,262 @@
+#include <string.h>
+
+#include "../s21_string.h"
+
+#test test_c_1
+char value1 = 'r';
+char value2 = '?';
+char *format = "%d %d %d %d";
+
+char string1[100], string2[100];
+
+s21_sprintf(string1, format, value1, value2, value1, value2);
+sprintf(string2, format, value1, value2, value1, value2);
+
+ck_assert_str_eq(string1, string2);
+
+#test test_c_2
+char value1 = '3';
+char value2 = ';';
+char *format = "%c %c %c %c";
+
+char string1[100], string2[100];
+
+s21_sprintf(string1, format, value1, value2, value1, value2);
+sprintf(string2, format, value1, value2, value1, value2);
+
+ck_assert_str_eq(string1, string2);
+
+#test test_d_1
+int value1 = 424;
+int value2 = 39;
+char *format = "%d %d %d %d";
+
+char string1[100], string2[100];
+
+s21_sprintf(string1, format, value1, value2, value1, value2);
+sprintf(string2, format, value1, value2, value1, value2);
+
+ck_assert_str_eq(string1, string2);
+
+#test test_d_2
+int value1 = -424;
+int value2 = 39;
+char *format = "%d %d %d %d";
+
+char string1[100], string2[100];
+
+s21_sprintf(string1, format, value1, value2, value1, value2);
+sprintf(string2, format, value1, value2, value1, value2);
+
+ck_assert_str_eq(string1, string2);
+
+#test test_d_3
+int value1 = 4994995;
+int value2 = 39;
+char *format = "%d %d %d %d";
+
+char string1[100], string2[100];
+
+s21_sprintf(string1, format, value1, value2, value1, value2);
+sprintf(string2, format, value1, value2, value1, value2);
+
+ck_assert_str_eq(string1, string2);
+
+#test test_d_4
+int value1 = 0;
+int value2 = 0;
+char *format = "%d %d %d %d";
+
+char string1[100], string2[100];
+
+s21_sprintf(string1, format, value1, value2, value1, value2);
+sprintf(string2, format, value1, value2, value1, value2);
+
+ck_assert_str_eq(string1, string2);
+
+#test test_f_1
+double value1 = 38.88;
+double value2 = 249.294994;
+char *format = "%f %f %f %f";
+
+char string1[100], string2[100];
+
+s21_sprintf(string1, format, value1, value2, value1, value2);
+sprintf(string2, format, value1, value2, value1, value2);
+
+ck_assert_str_eq(string1, string2);
+
+#test test_f_2
+double value1 = -38.88;
+double value2 = 249.294994;
+char *format = "%f %f %f %f";
+
+char string1[100], string2[100];
+
+s21_sprintf(string1, format, value1, value2, value1, value2);
+sprintf(string2, format, value1, value2, value1, value2);
+
+ck_assert_str_eq(string1, string2);
+
+#test test_f_3
+double value1 = 38.000;
+double value2 = -309;
+char *format = "%f %f %f %f";
+
+char string1[100], string2[100];
+
+s21_sprintf(string1, format, value1, value2, value1, value2);
+sprintf(string2, format, value1, value2, value1, value2);
+
+ck_assert_str_eq(string1, string2);
+
+#test test_f_4
+double value1 = 38.00399;
+double value2 = -309.3939900203;
+char *format = "%f %f %f %f";
+
+char string1[100], string2[100];
+
+s21_sprintf(string1, format, value1, value2, value1, value2);
+sprintf(string2, format, value1, value2, value1, value2);
+
+ck_assert_str_eq(string1, string2);
+
+#test test_s_1
+char *value1 = "The Studpassive podcast is the first truly student podcast";
+char *value2 = ", recorded by students for students.";
+char *format = "%s %s %s %s";
+
+char string1[1000], string2[1000];
+
+s21_sprintf(string1, format, value1, value2, value1, value2);
+sprintf(string2, format, value1, value2, value1, value2);
+
+ck_assert_str_eq(string1, string2);
+
+#test test_s_2
+char *value1 = "The Studpassive podcast is the first truly student podcast";
+char *value2 = "  ";
+char *format = "%s %s %s %s";
+
+char string1[1000], string2[1000];
+
+s21_sprintf(string1, format, value1, value2, value1, value2);
+sprintf(string2, format, value1, value2, value1, value2);
+
+ck_assert_str_eq(string1, string2);
+
+#test test_u_1
+int value1 = 4994995;
+int value2 = 39;
+char *format = "%u %u %u %u";
+
+char string1[100], string2[100];
+
+s21_sprintf(string1, format, value1, value2, value1, value2);
+sprintf(string2, format, value1, value2, value1, value2);
+
+ck_assert_str_eq(string1, string2);
+
+#test test_u_2
+int value1 = 4994995;
+int value2 = -39;
+char *format = "%u %u %u %u";
+
+char string1[100], string2[100];
+
+s21_sprintf(string1, format, value1, value2, value1, value2);
+sprintf(string2, format, value1, value2, value1, value2);
+
+ck_assert_str_eq(string1, string2);
+
+#test test_percent_1
+int value1 = 4994995;
+int value2 = -39;
+char *format = "%% %u %u %u";
+
+char string1[100], string2[100];
+
+s21_sprintf(string1, format, value1, value2, value1);
+sprintf(string2, format, value1, value2, value1);
+
+ck_assert_str_eq(string1, string2);
+
+#test test_justify_1
+int value1 = 4994995;
+char *format = "%-50d";
+
+char string1[100], string2[100];
+
+s21_sprintf(string1, format, value1);
+sprintf(string2, format, value1);
+
+ck_assert_str_eq(string1, string2);
+
+#test test_mark_1
+int value1 = 394;
+int value2 = -34;
+char *format = "test%+-10d, haha%d, %d, %+d";
+
+char string1[100], string2[100];
+
+s21_sprintf(string1, format, value1, value2, value1, value2);
+sprintf(string2, format, value1, value2, value1, value2);
+
+ck_assert_str_eq(string1, string2);
+
+#test test_space_1
+int value1 = 394;
+int value2 = -34;
+char *format = "% d, % d";
+
+char string1[100], string2[100];
+
+s21_sprintf(string1, format, value1, value2);
+sprintf(string2, format, value1, value2);
+
+ck_assert_str_eq(string1, string2);
+
+#test test_width_1
+int value1 = 394;
+char *format = "%39d";
+
+char string1[100], string2[100];
+
+s21_sprintf(string1, format, value1);
+sprintf(string2, format, value1);
+
+ck_assert_str_eq(string1, string2);
+
+#test test_precision_1
+double value1 = 394.39;
+char *format = "%.25f";
+
+char string1[100], string2[100];
+
+s21_sprintf(string1, format, value1);
+sprintf(string2, format, value1);
+
+ck_assert_str_eq(string1, string2);
+
+#test test_h_1
+int value1 = -394;
+char *format = "%hd";
+
+char string1[100], string2[100];
+
+s21_sprintf(string1, format, value1);
+sprintf(string2, format, value1);
+
+ck_assert_str_eq(string1, string2);
+
+#test test_l_1
+long int value1 = -394;
+char *format = "%ld";
+
+char string1[100], string2[100];
+
+s21_sprintf(string1, format, value1);
+sprintf(string2, format, value1);
+
+ck_assert_str_eq(string1, string2);

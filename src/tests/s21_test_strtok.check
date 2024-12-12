@@ -1,0 +1,47 @@
+#include <string.h>
+
+#include "../s21_string.h"
+
+#test usual_values
+const char *delim = "/";
+char str[] = "test0/test1/test2";
+ck_assert_str_eq(s21_strtok(str, delim), strtok(str, delim));
+
+#test long_string
+const char *delim = "s_21";
+char str[] =
+    "The strtok() function s_21 breaks a string s_21 into a sequence of zero "
+    "s_21 or more nonempty tokens. On the s_21 first call to strtok s_21()";
+ck_assert_str_eq(strtok(str, delim), s21_strtok(str, delim));
+
+#test end_of_file
+const char delim[] = "'\0'";
+char str[] = "\'0'";
+ck_assert_ptr_eq(strtok(str, delim), s21_strtok(str, delim));
+
+#test one_char
+const char delim[] = "#";
+char str[] = "#";
+ck_assert_ptr_eq(strtok(str, delim), s21_strtok(str, delim));
+
+#test null_delim
+const char *delim = "S21_NULL";
+char str[] = "test0/test1/test2";
+ck_assert_str_eq(s21_strtok(str, delim), strtok(str, delim));
+
+#test null_str
+const char *delim = "/";
+char str[] = "S21_NULL";
+ck_assert_str_eq(s21_strtok(str, delim), strtok(str, delim));
+
+#test null_str1
+const char *delim = "/";
+char str[] = "";
+ck_assert_ptr_eq(s21_strtok(str, delim), strtok(str, delim));
+
+#test no_such_value
+const char *delim = "#$%00";
+char str[] =
+    "The strtok() function breaks a string into a sequence of zero or more "
+    "nonempty tokens. On the first call to strtok()";
+ck_assert_str_eq(strtok(str, delim), s21_strtok(str, delim));

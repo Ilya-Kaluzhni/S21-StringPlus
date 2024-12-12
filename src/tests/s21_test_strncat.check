@@ -1,0 +1,57 @@
+#include <string.h>
+
+#include "../s21_string.h"
+
+#test normal_1
+char str_1[50] = "Hello_world";
+char *str_2 = "12345";
+char str_3[50] = "Hello_world";
+ck_assert_str_eq(s21_strncat(str_1, str_2, 3), strncat(str_3, str_2, 3));
+
+#test normal_2
+char str_1[50] = "abcdef";
+char *str_2 = "12345";
+char str_3[50] = "abcdef";
+ck_assert_str_eq(s21_strncat(str_1, str_2, 5), strncat(str_3, str_2, 5));
+
+#test str2_shorter
+char str_1[50] = "School_21";
+char *str_2 = "abc";
+char str_3[50] = "School_21";
+ck_assert_str_eq(s21_strncat(str_1, str_2, 4), strncat(str_3, str_2, 4));
+
+#test null_error
+char str_1[50] = "School_21";
+char *str_2 = S21_NULL;
+char *result_return = s21_strncat(str_1, str_2, 4);
+ck_assert_ptr_null(result_return);
+
+#test empty
+char str_1[50] = "School_21";
+char *str_2 = "";
+char str_3[50] = "School_21";
+ck_assert_str_eq(s21_strncat(str_1, str_2, 5), strncat(str_3, str_2, 5));
+
+#test escape_sqn
+char str_1[50] = "School_21";
+char *str_2 = "hello\tU";
+char str_3[50] = "School_21";
+ck_assert_str_eq(s21_strncat(str_1, str_2, 7), strncat(str_3, str_2, 7));
+
+#test extra_symbols
+char str_1[50] = "abcdef";
+char *str_2 = "1234#";
+char str_3[50] = "abcdef";
+ck_assert_str_eq(s21_strncat(str_1, str_2, 5), strncat(str_3, str_2, 5));
+
+#test long_str
+char str_1[500] =
+    "For almost a year, a group of the brightest mathematicians, linguists and "
+    "crossword puzzle enthusiasts have been trying to solve the most difficult "
+    "problem of deciphering the German Enigma cipher";
+char *str_2 = "abcdef";
+char str_3[500] =
+    "For almost a year, a group of the brightest mathematicians, linguists and "
+    "crossword puzzle enthusiasts have been trying to solve the most difficult "
+    "problem of deciphering the German Enigma cipher";
+ck_assert_str_eq(s21_strncat(str_1, str_2, 9), strncat(str_3, str_2, 9));

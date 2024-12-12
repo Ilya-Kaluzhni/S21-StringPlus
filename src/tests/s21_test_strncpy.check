@@ -1,0 +1,48 @@
+#include <string.h>
+
+#include "../s21_string.h"
+
+#test normal_copy
+char source[] = "Test string";
+char dest1[20];
+char dest2[20];
+size_t n = 4;
+s21_strncpy(dest1, source, n);
+strncpy(dest2, source, n);
+ck_assert_mem_eq(dest1, dest2, n);
+
+#test partial_copy
+char source[] = "Test string";
+char dest1[20] = {0};
+char dest2[20] = {0};
+s21_strncpy(dest1, source, 5);
+strncpy(dest2, source, 5);
+ck_assert_mem_eq(dest1, dest2, 5);
+
+#test zero_length
+char source[] = "Test string";
+char zero_length_buffer1[20] = "Initial string";
+char zero_length_buffer2[20] = "Initial string";
+size_t n = 0;
+s21_strncpy(zero_length_buffer1, source, n);
+strncpy(zero_length_buffer2, source, n);
+ck_assert_mem_eq(zero_length_buffer1, zero_length_buffer2, n);
+
+#test copy_less_than_source_length
+char source[] = "Test string";
+char dest1[20];
+char dest2[20];
+s21_strncpy(dest1, source, 4);
+strncpy(dest2, source, 4);
+ck_assert_mem_eq(dest1, dest2, 4);
+
+#test copy_more_than_source_length
+char source[] = "Test";
+char dest1[20] = {0};
+char dest2[20] = {0};
+s21_strncpy(dest1, source, 10);
+strncpy(dest2, source, 10);
+ck_assert_mem_eq(dest1, dest2, 10);
+
+#test null_error
+ck_assert_ptr_null(s21_strncpy(S21_NULL, "Privetiki", 5));
